@@ -981,6 +981,10 @@ class SafetyTest(SafetyTestBase):
               continue
             if attr.startswith('TestSubaruPreglobal') and current_test.startswith('TestSubaruPreglobal'):
               continue
+            # same safety model, different params: the LONG param whitelist
+            # contains the torque path's own messages by design
+            if attr.startswith('TestByd') and current_test.startswith('TestByd'):
+              continue
             if {attr, current_test}.issubset({'TestVolkswagenPqSafety', 'TestVolkswagenPqStockSafety', 'TestVolkswagenPqLongSafety'}):
               continue
             if {attr, current_test}.issubset({'TestGmCameraSafety', 'TestGmCameraLongitudinalSafety', 'TestGmAscmSafety',

@@ -10,9 +10,6 @@ legend = ["LAT_ACCEL_FACTOR", "MAX_LAT_ACCEL_MEASURED", "FRICTION"]
 # PSA angle based controllers
 "PSA_PEUGEOT_208" = [nan, 2.0, nan]
 
-# BYD angle based controllers
-"BYD_ATTO_3" = [nan, 2.0, nan]
-
 # New subarus angle based controllers
 "SUBARU_FORESTER_2022" = [nan, 3.0, nan]
 "SUBARU_OUTBACK_2023" = [nan, 3.0, nan]
@@ -45,6 +42,10 @@ legend = ["LAT_ACCEL_FACTOR", "MAX_LAT_ACCEL_MEASURED", "FRICTION"]
 
 # No steering wheel
 "COMMA_BODY" = [nan, 1000, nan]
+
+# BYD torque based controller (default path steers via LKAS_Output torque request);
+# values measured on the open BYD device port (Song Plus DM-i)
+"BYD_SONG_PLUS_DMI_22" = [2.5, 2.5, 0.10]
 
 # Totally new cars
 "RAM_1500_5TH_GEN" = [2.0, 2.0, 0.05]

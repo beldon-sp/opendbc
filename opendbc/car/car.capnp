@@ -229,6 +229,12 @@ struct CarState {
   fuelGauge @41 :Float32; # battery or fuel tank level from [0.0, 1.0]
   charging @43 :Bool;
 
+  # byd radar gap monitor telemetry (bus1 T8 gap monitor in opendbc.car.byd.carstate;
+  # consumed by desire_helper_byd, otherwise display-only)
+  radarGapClosing @62 :Bool;  # gap ratio r=b7/vEgo crossed the band's lower boundary downward, debounced
+  radarGapNew @63 :Bool;      # target newly became radar-visible (capture leads the HUD gear flip)
+  radarGapLane @64 :UInt8;    # stage-3 lane discrimination (0=unknown/1=own/2=adjacent)
+
   struct WheelSpeeds {
     # optional wheel speeds
     fl @0 :Float32;
@@ -371,6 +377,7 @@ struct CarControl {
     # longitudinal commands
     accel @4: Float32;  # m/s^2
     longControlState @5: LongControlState;
+    jerk @9: Float32;  # m/s^3
 
     # these are only for logging the actual values sent to the car over CAN
     gas @0: Float32;   # [0.0, 1.0]

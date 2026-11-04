@@ -16,7 +16,7 @@ from opendbc.car.volkswagen.mlbcan import volkswagen_mlb_checksum
 from opendbc.car.volkswagen.mqbcan import volkswagen_meb_alt_crc_checksum, volkswagen_mqb_meb_checksum, xor_checksum
 from opendbc.car.tesla.teslacan import tesla_checksum
 from opendbc.car.body.bodycan import body_checksum
-from opendbc.car.byd.bydcan import byd_checksum
+from opendbc.car.byd.bydcan import byd_checksum as _byd_checksum_raw
 from opendbc.car.psa.psacan import psa_checksum
 from opendbc.car.rivian.riviancan import rivian_checksum
 from opendbc.car.ford.fordcan import FORD_CHECKSUM_FIELDS, ford_checksum
@@ -193,6 +193,13 @@ class DBC:
 
 
 # ***** checksum functions *****
+
+def byd_checksum(address: int, sig: Signal, dat: bytearray) -> int:
+  # 3-arg python-packer adapter for the byd_ DBCs: the byd checksum covers
+  # bytes 0..6 with the fixed 0xAF key (bydcan.byd_checksum(byte_key, dat)),
+  # matching the controller's own manual re-stamp bit-for-bit
+  return _byd_checksum_raw(0xAF, dat[:-1])
+
 
 def tesla_setup_signal(sig: Signal, dbc_name: str, line_num: int) -> None:
   if sig.name.endswith("Counter"):

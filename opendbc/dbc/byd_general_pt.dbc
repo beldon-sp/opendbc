@@ -1,0 +1,441 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: XXX
+
+; Message layouts for 287/301/307/578/790/792/813/814/834/884/944/1048 are from
+; byd_han_dmev_2020.dbc, extracted from a working BYD device. 482/508 are the
+; Atto 3 (bukapilot) DiPilot camera layouts, kept for the experimental angle path.
+
+BO_ 287 EPS: 5 XXX
+ SG_ SteeringAngle : 0|16@1- (0.1,0) [-450|450] "" XXX
+ SG_ SteeringAngleRate : 16|8@1+ (4,0) [0|1020] "" XXX
+ SG_ Counter : 32|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 290 WHEEL_SPEED: 8 XXX
+ SG_ WHEELSPEED_FL : 0|16@1+ (0.1,0) [0|65535] "" XXX
+ SG_ WHEELSPEED_FR : 16|16@1+ (0.1,0) [0|65535] "" XXX
+ SG_ WHEELSPEED_BL : 32|16@1+ (0.1,0) [0|65535] "" XXX
+ SG_ WHEELSPEED_BR : 48|16@1+ (0.1,0) [0|65535] "" XXX
+
+BO_ 301 BCM: 8 XXX
+ SG_ FrontLeftDoor : 0|1@0+ (1,0) [0|1] "" XXX
+ SG_ FrontRightDoor : 1|1@0+ (1,0) [0|1] "" XXX
+ SG_ RearLeftDoor : 2|1@0+ (1,0) [0|1] "" XXX
+ SG_ RearRightDoor : 3|1@0+ (1,0) [0|1] "" XXX
+ SG_ BootDoor : 4|1@0+ (1,0) [0|1] "" XXX
+ SG_ DriverSeatBeltFasten : 6|1@0+ (1,0) [0|1] "" XXX
+ SG_ BrakeLight : 8|1@0+ (1,0) [0|1] "" XXX
+
+BO_ 307 STALKS: 8 XXX
+ SG_ LightsOn : 1|1@1+ (1,0) [0|1] "" XXX
+ SG_ LeftIndicator : 4|1@0+ (1,0) [0|1] "" XXX
+ SG_ RightIndicator : 5|1@0+ (1,0) [0|1] "" XXX
+ SG_ TURN_SIGNAL_SWITCH : 36|3@1+ (1,0) [0|7] "" XXX
+ SG_ Heartbeat : 63|4@0+ (1,0) [0|15] "" XXX
+
+BO_ 496 ESP_SPEED: 8 XXX
+ SG_ VehicleSpeed : 32|8@1+ (1,0) [0|255] "km/h" XXX
+
+BO_ 482 STEERING_MODULE_ADAS: 8 XXX
+ SG_ STEER_ANGLE : 24|16@1- (0.1,0) [0|255] "" XXX
+ SG_ COUNTER : 55|4@0+ (1,0) [0|15] "" XXX
+ SG_ CHECKSUM : 56|8@1+ (1,0) [0|255] "" XXX
+ SG_ SET_ME_FF : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ SET_ME_F : 48|4@1+ (1,0) [0|15] "" XXX
+ SG_ SET_ME_XE : 16|4@1+ (1,0) [0|15] "" XXX
+ SG_ SET_ME_X01 : 8|2@1+ (1,0) [0|3] "" XXX
+ SG_ SET_ME_1_1 : 23|1@0+ (1,0) [0|1] "" XXX
+ SG_ STEER_REQ_ACTIVE_LOW : 20|1@0+ (1,0) [0|1] "" XXX
+ SG_ SET_ME_1_2 : 22|1@0+ (1,0) [0|3] "" XXX
+ SG_ STEER_REQ : 21|1@0+ (1,0) [0|1] "" XXX
+ SG_ UNKNOWN : 7|14@0- (1,0) [0|65535] "" XXX
+
+BO_ 508 STEERING_TORQUE: 8 XXX
+ SG_ MAIN_TORQUE : 0|16@1- (0.1,0) [0|65535] "" XXX
+ SG_ COUNTER : 55|4@0+ (1,0) [0|15] "" XXX
+ SG_ CHECKSUM : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 578 DRIVE_STATE: 8 XXX
+ SG_ ReqThrottle : 30|7@0+ (1,0) [0|127] "" XXX
+ SG_ BrakePressed : 37|1@0+ (1,0) [0|1] "" XXX
+ SG_ Gear : 40|3@1+ (1,0) [0|7] "" XXX
+ SG_ Counter : 55|4@0+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 790 ACC_MPC_STATE: 8 XXX
+ SG_ AutoFullBeamState : 3|4@0+ (1,0) [0|1] "" XXX
+ SG_ LeftLaneState : 4|2@1+ (1,0) [0|3] "" XXX
+ SG_ LKAS_Config : 6|2@1+ (1,0) [0|3] "" XXX
+ SG_ SETME2_0x1 : 8|2@1+ (1,0) [0|3] "" XXX
+ SG_ ReqHandsOnSteeringWheel : 10|1@1+ (1,0) [0|1] "" XXX
+ SG_ MPC_State : 11|4@1+ (1,0) [0|1] "" XXX
+ SG_ AutoFullBeam_OnOff : 15|1@0+ (1,0) [0|1] "" XXX
+ SG_ LKAS_Output : 16|11@1- (1,0) [-1024|1023] "" XXX
+ SG_ LKAS_ReqPrepare : 27|1@1+ (1,0) [0|1] "" XXX
+ SG_ LKAS_Active : 28|1@1+ (1,0) [0|3] "" XXX
+ SG_ SETME3_0x0 : 29|1@0+ (1,0) [0|1] "" XXX
+ SG_ TrafficSignRecognition_OnOff : 30|1@0+ (1,0) [0|1] "" XXX
+ SG_ SETME4_0x0 : 31|1@0+ (1,0) [0|1] "" XXX
+ SG_ SETME5_0x1 : 32|2@1+ (1,0) [0|3] "" XXX
+ SG_ RightLaneState : 34|2@1+ (1,0) [0|3] "" XXX
+ SG_ LKAS_State : 36|4@1+ (1,0) [0|3] "" XXX
+ SG_ TrafficSignRecognition_Result : 40|8@1+ (5,-5) [-5|1270] "" XXX
+ SG_ LKAS_AlarmType : 49|2@0+ (1,0) [0|3] "" XXX
+ SG_ SETME7_0x3 : 51|2@0+ (1,0) [0|3] "" XXX
+ SG_ Counter : 52|4@1+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 792 ACC_EPS_STATE: 8 XXX
+ SG_ LKAS_Prepared : 0|1@1+ (1,0) [0|1] "" XXX
+ SG_ CruiseActivated : 1|1@1+ (1,0) [0|1] "" XXX
+ SG_ TorqueFailed : 2|1@1+ (1,0) [0|1] "" XXX
+ SG_ SETME1_0x1 : 3|1@1+ (1,0) [0|1] "" XXX
+ SG_ SteerWarning : 4|1@1+ (1,0) [0|1] "" XXX
+ SG_ SteerErrorCode : 5|3@1+ (1,0) [0|1] "" XXX
+ SG_ MainTorque : 8|12@1- (1,0) [-2048|2047] "" XXX
+ SG_ SETME3_0x1 : 20|1@1+ (1,0) [0|1] "" XXX
+ SG_ ReportHandsNotOnSteeringWheel : 21|1@1+ (1,0) [0|1] "" XXX
+ SG_ SETME4_0x3 : 22|2@1+ (1,0) [0|15] "" XXX
+ SG_ SteerDriverTorque : 24|12@1- (1,0) [-2048|2047] "" XXX
+ SG_ SETME5_0xFF : 36|4@1+ (1,0) [0|15] "" XXX
+ SG_ SETME6_0xFFF : 40|12@1+ (1,0) [0|4095] "" XXX
+ SG_ Counter : 52|4@1+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 813 ACC_HUD_ADAS: 8 XXX
+ SG_ SetSpeed : 0|9@1+ (0.5,0) [0|255.5] "" XXX
+ SG_ HasLead : 9|1@1+ (1,0) [0|1] "" XXX
+ SG_ SetDistance : 10|3@1+ (1,0) [0|7] "" XXX
+ SG_ LeadingDistance : 13|3@1+ (1,0) [0|7] "" XXX
+ SG_ AEB : 16|1@1+ (1,0) [0|1] "" XXX
+ SG_ FCW : 17|1@1+ (1,0) [0|1] "" XXX
+ SG_ SETME1_0x1 : 18|1@1+ (1,0) [0|1] "" XXX
+ SG_ AccState : 19|3@1+ (1,0) [0|1] "" XXX
+ SG_ AccOn1 : 22|1@0+ (1,0) [0|1] "" XXX
+ SG_ CloseWarning : 23|1@0+ (1,0) [0|1] "" XXX
+ SG_ SETME2_0x1 : 24|1@1+ (1,0) [0|1] "" XXX
+ SG_ Notify : 25|7@1+ (1,0) [0|127] "" XXX
+ SG_ Status : 32|4@1+ (1,0) [0|15] "" XXX
+ SG_ SETME3_0xFFF : 36|12@1+ (1,0) [0|4095] "" XXX
+ SG_ Counter : 48|4@1+ (1,0) [0|15] "" XXX
+ SG_ SETME4_0xF : 55|4@0+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 814 ACC_CMD: 8 XXX
+ SG_ AccelCmd : 0|8@1+ (0.05,-5) [-100|155] "" XXX
+ SG_ ComfortBandUpper : 8|8@1+ (0.05,-5) [0|1.26] "" XXX
+ SG_ ComfortBandLower : 16|8@1+ (0.05,-5) [0|1.26] "" XXX
+ SG_ JerkUpperLimit : 24|7@1+ (0.2,0) [0|12.7] "" XXX
+ SG_ SETME1_0x1 : 31|1@0+ (1,0) [0|1] "" XXX
+ SG_ JerkLowerLimit : 32|7@1+ (0.2,-16) [0|12.7] "" XXX
+ SG_ ResumeFromStandstill : 39|1@0+ (1,0) [0|1] "" XXX
+ SG_ StandstillState : 40|1@0+ (1,0) [0|1] "" XXX
+ SG_ BrakeBehaviour : 41|2@1+ (1,0) [0|3] "" XXX
+ SG_ AccReqNotStandstill : 43|1@1+ (1,0) [0|1] "" XXX
+ SG_ AccControlActive : 44|1@0+ (1,0) [0|1] "" XXX
+ SG_ AccOverrideOrStandstill : 45|1@0+ (1,0) [0|1] "" XXX
+ SG_ EspBehaviour : 46|2@1+ (1,0) [0|3] "" XXX
+ SG_ Counter : 48|4@1+ (1,0) [0|15] "" XXX
+ SG_ SETME2_0xF : 55|4@0+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+; 0x32F ACC_AEB heartbeat, byte-verified against the vendor build's TX in
+; route 00000037 (docs_site/op_byd_logs): static payload `05 80 02 0f ff ff`,
+; 4-bit counter in byte 6 low nibble, 0xF constant in byte 6 high nibble,
+; byd_checksum(0xAF) in byte 7. PAYLOAD is little-endian so the parse->pack
+; echo round-trips byte-identical (48-bit Motorola start bit 0 does not).
+BO_ 815 ACC_AEB: 8 XXX
+ SG_ PAYLOAD : 0|48@1+ (1,0) [0|281474976710655] "" XXX
+ SG_ Counter : 48|4@1+ (1,0) [0|15] "" XXX
+ SG_ SETME4_0xF : 52|4@1+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 834 PEDAL: 8 XXX
+ SG_ AcceleratorPedal : 0|8@1+ (0.01,0) [0|2.55] "" XXX
+ SG_ BrakePedal : 8|8@1+ (0.01,0) [0|2.55] "" XXX
+ SG_ ForceGeneratorMode : 19|1@1+ (1,0) [0|1] "" XXX
+ SG_ DriveMode : 20|2@1+ (1,0) [0|255] "" XXX
+ SG_ PowerMode : 28|2@1+ (1,0) [0|1] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 884 RADAR_MRR: 8 XXX
+ SG_ TargetID : 1|2@0+ (1,0) [0|3] "" XXX
+ SG_ Type : 7|4@0+ (1,0) [0|15] "" XXX
+ SG_ LatDist : 15|8@0+ (0.1,-12) [0|255] "" XXX
+ SG_ LongDist : 23|8@0+ (1,-100) [0|255] "" XXX
+ SG_ IsValid : 40|1@0+ (1,0) [0|3] "" XXX
+ SG_ Counter : 52|4@1+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 944 PCM_BUTTONS: 8 XXX
+ SG_ SETME_1 : 2|1@0+ (1,0) [0|1] "" XXX
+ SG_ BTN_AccUpDown_Cmd : 4|2@0+ (1,0) [0|3] "" XXX
+ SG_ BTN_AccCancel : 6|1@0+ (1,0) [0|1] "" XXX
+ SG_ BTN_TOGGLE_ACC_OnOff : 8|1@0+ (1,0) [0|1] "" XXX
+ SG_ SETME2_1 : 12|1@0+ (1,0) [0|1] "" XXX
+ SG_ BTN_AccDistanceDecrease : 15|1@0+ (1,0) [0|1] "" XXX
+ SG_ BTN_AccDistanceIncrease : 16|1@0+ (1,0) [0|1] "" XXX
+ SG_ Counter : 52|4@1+ (1,0) [0|15] "" XXX
+ SG_ CheckSum : 56|8@1+ (1,0) [0|255] "" XXX
+
+BO_ 1048 BSD_RADAR: 8 XXX
+; NOTE(Song Plus DM-i): VEHICLE_SPEED here is a constant (~8.5) and is NOT the
+; real vehicle speed; use ESP_SPEED (0x1f0) for speed instead.
+ SG_ LEFT_APPROACH : 9|2@0+ (1,0) [0|1] "" XXX
+ SG_ RIGHT_APPROACH : 11|2@0+ (1,0) [0|1] "" XXX
+ SG_ APPROACH : 17|1@0+ (1,0) [0|1] "" XXX
+ SG_ VEHICLE_SPEED : 16|16@1+ (0.1,0) [0|6553.5] "" XXX
+
+VAL_ 578 Gear 4 "D" 3 "N" 2 "R" 1 "P" ;
+VAL_ 790 LKAS_Config 3 "ALARM_AND_LKA" 2 "LKA" 1 "ALARM" 0 "DISABLE" ;
+VAL_ 790 LeftLaneState 0 "GRAY" 1 "GREEN" 2 "YELLOW" 3 "RED" ;
+VAL_ 790 RightLaneState 0 "GRAY" 1 "GREEN" 2 "YELLOW" 3 "RED" ;
+VAL_ 790 LKAS_AlarmType 0 "VIBRATION" 1 "AUDIO" 2 "AUDIO_AND_VIBRATION" ;
+VAL_ 813 SetDistance 4 "4BAR" 3 "3BAR" 2 "2BAR" 1 "1BAR" ;
+VAL_ 813 AccState 0 "OFF" 1 "ACC_ACTIVE" 2 "ACC_ON" 3 "ACC_ACTIVE_HAN" 5 "FORCE_ACCEL" 7 "ERROR" ;
+VAL_ 813 Notify 36 "ACC_ERROR" 22 "OVERRIDE" 12 "ENGAGE" 8 "DISENGAGE" 20 "ACC_ON" 32 "ACC_OFF" 48 "CHECK_GEAR_D" 16 "FORCE_ACCEL" 0 "NONE" ;
+VAL_ 834 DriveMode 2 "SPORT" 1 "ECO" 0 "SNOW" ;
+VAL_ 834 PowerMode 3 "HEV" 2 "FORCE_EV" 1 "EV" ;
+VAL_ 944 BTN_AccUpDown_Cmd 0 "NOTPRESSED" 1 "DOWN_SETSPEED" 3 "UP_RESETSPEED" ;
+
+; MRR track slots on bus 1 (Song Plus DM-i: frames present @~25Hz but 415 logged
+; segments show IsValid=0 only - placeholder slots; layout from the mypilot
+; community byd_tangdm_radar.dbc, verbatim including the 850 LatDist sign quirk,
+; see docs/byd-lane-change.md §8.5.6). b0/b1 are rolling freshness/CRC bytes.
+BO_ 849 RADAR_TRACK_351: 8 XXX
+ SG_ LongDist_tang : 16|12@1- (0.06,-4) [-61.44|61.41] "m" XXX
+ SG_ LatDist_tang : 28|10@1+ (0.05,-25.6) [-15.36|15.33] "m" XXX
+ SG_ TrackID_tang : 38|6@1+ (1,0) [0|63] "" XXX
+ SG_ RelSpeed_tang : 44|10@1+ (1,-512) [-512|511] "km/h" XXX
+ SG_ IsValid_tang : 56|1@0+ (1,0) [0|1] "" XXX
+
+BO_ 850 RADAR_TRACK_352: 8 XXX
+ SG_ LongDist_tang : 16|12@1- (0.06,-4) [-61.44|61.41] "m" XXX
+ SG_ LatDist_tang : 28|10@1+ (-0.05,-25.6) [-15.36|15.33] "m" XXX
+ SG_ TrackID_tang : 38|6@1+ (1,0) [0|63] "" XXX
+ SG_ RelSpeed_tang : 44|10@1+ (1,-512) [-512|511] "km/h" XXX
+ SG_ IsValid_tang : 56|1@0+ (1,0) [0|1] "" XXX
+
+BO_ 851 RADAR_TRACK_353: 8 XXX
+ SG_ LongDist_tang : 16|12@1- (0.06,-4) [-61.44|61.41] "m" XXX
+ SG_ LatDist_tang : 28|10@1+ (0.05,-25.6) [-15.36|15.33] "m" XXX
+ SG_ TrackID_tang : 38|6@1+ (1,0) [0|63] "" XXX
+ SG_ RelSpeed_tang : 44|10@1+ (1,-512) [-512|511] "km/h" XXX
+ SG_ IsValid_tang : 56|1@0+ (1,0) [0|1] "" XXX
+
+BO_ 852 RADAR_TRACK_354: 8 XXX
+ SG_ LongDist_tang : 16|12@1- (0.06,-4) [-61.44|61.41] "m" XXX
+ SG_ LatDist_tang : 28|10@1+ (0.05,-25.6) [-15.36|15.33] "m" XXX
+ SG_ TrackID_tang : 38|6@1+ (1,0) [0|63] "" XXX
+ SG_ RelSpeed_tang : 44|10@1+ (1,-512) [-512|511] "km/h" XXX
+ SG_ IsValid_tang : 56|1@0+ (1,0) [0|1] "" XXX
+
+; --------------------------------------------------------------------------------
+; Bus 1 0x10x raw-MRR block (Song Plus DM-i, ~25 Hz, src=1). Mined from
+; docs_site/hour_logs + docs_site/byd_logs_2026-10-05_07; evidence chain and
+; full numbers in docs/byd-radar-010x.md. The 415-segment re-scan refutes the
+; old "status broadcast / counter artifact" verdict for 0x109 b7 (global
+; distinct(b7)=240 vs HUD 4 bars; monotone mean(c4)>mean(c3)>mean(c2) strict
+; in 90.3% of eligible segments; within-constant-bar hold variation median
+; 9.99% vs 0.00% for no-lead) - it is a continuous forward target distance,
+; upstream of the 0x32D gap bars, NOT a bar echo.
+; STATUS: HYPOTHESIS entries only, NO on-car parser instantiates these frames
+; (radar_interface.py / values.py / control paths untouched, CP.radarUnavailable
+; unchanged - road behavior byte-identical). b0 CRC IS CRACKED (2026-10-18):
+; SAE J1850 CRC-8 = CRC-8(poly 0x1D, init 0xFF, no refl, xorout 0xFF) over
+; b1..b7 -> b0; 100% on 2933 unique payloads (hour_logs) and 80100/80100 on a
+; different-day set (hour_logs_2, frames 101/102/106/109/10A).
+; The LongDist_109 unit u: hard upper bound u <= 0.42-0.44 from 13 stop-to-lead
+; events in byd_logs_2026-10-05_07 (tools/byd/radar_stop2lead.py; per-window
+; u <= D/delta_b7 holds since the lead cannot reverse) -> METERS 1.0 AND
+; 0.5/0.45 REFUTED. Surviving candidates were feet 0.3048 vs 0.25. PINNED
+; 2026-10-19 by owner decision: u = 0.25 m/count (recalled real stop gap on the
+; 0.25 side: 15c -> 3.75 m; tau ladder {0.71,1.02,1.4} s, minor-gap shapes).
+; Derivatives: block-C x12 = 1/32 m, block-B = 1 dm, min b7=9 -> 2.25 m,
+; b7=246 top -> 61.5 m. Offline logs cannot tighten this further; see CM_.
+; All non-HYPOTHESIS bytes are MSG_<frame>_B<n> raw placeholders (factor 1,
+; offset 0) - no fabricated field formulas. Bit order is Motorola @0+ with
+; MSB start bits (byte k = 8k..8k+7), whole byte k = (8k+7)|8@0+.
+; --------------------------------------------------------------------------------
+
+; 0x101/0x105: pure transport retransmissions - 99.7-100% byte-identical to
+; each other including b0, so they are NOT a checksum/redundancy source for
+; 0x109. b7 there behaves RawLongDist-like (corr 0.73-0.77, ratio drift
+; 1.36-2x, can see targets earlier than the HUD bar) - kept as placeholder.
+BO_ 257 RADAR_RETX_101: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B3 : 31|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_101_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+BO_ 258 RADAR_HEALTH_102: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B3 : 31|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_102_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+; 0x102/0x106: sensor-health A/B pair (b4 slow physical quantity ~152/~103,
+; independent of lead/no-lead). Role high-confidence, meaning UNKNOWN ->
+; every payload byte stays a MSG placeholder.
+BO_ 261 RADAR_RETX_105: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B3 : 31|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_105_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+BO_ 262 RADAR_HEALTH_106: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B3 : 31|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_106_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+; 0x109: the continuous forward distance frame. b6[7] is the Valid/captured
+; flag candidate (idle 0x7F vs lead 46% 0xFF, not strictly in sync with
+; b7>0) - ObjValid intentionally NOT added (confidence medium, placeholder).
+; 0 = no target; 247 suspected over-range sentinel (unproven).
+BO_ 265 RADAR_DIST_109: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_109_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_109_B3 : 31|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_109_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_109_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_109_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ LongDist_109 : 63|8@0+ (0.25,0) [0|61.5] "m" XXX
+ SG_ MSG_109_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+; 0x10A: presence/companion frame. b3[7:5]==111 = forward target visible:
+; agreement with HUD lead median 98.62% (p75=100%) over 415 segments,
+; false-positive median 0.00% but 10 segments carry radar-visible-no-HUD-lead
+; residuals -> gate the c0 residuals/247 sentinel with Presence, not the bar.
+BO_ 266 RADAR_PRESENCE_10A: 8 XXX
+ SG_ MSG_10x_CheckSum : 7|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10x_AliveCounter : 15|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10A_B2 : 23|8@0+ (1,0) [0|255] "" XXX
+ SG_ Presence_10A : 31|3@0+ (1,0) [0|7] "" XXX
+ SG_ MSG_10A_B3_LOW : 28|5@0+ (1,0) [0|31] "" XXX
+ SG_ MSG_10A_B4 : 39|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10A_B5 : 47|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10A_B6 : 55|8@0+ (1,0) [0|255] "" XXX
+ SG_ MSG_10A_B7 : 63|8@0+ (1,0) [0|255] "" XXX
+
+; --------------------------------------------------------------------------------
+; 2026-10-21: chassis dynamics frames, verbatim from carrot2 (huheas/carrotpilot)
+; byd_han_dmev_2020.dbc BO_ 546/547. YAW_RATE was validated against kinematic yaw
+; on our own car: corr 0.90-0.97, regression slope ~1.0, sign matches the steering
+; angle convention (left positive); observed frame rate ~50 Hz, NOT the nominal 60
+; (docs/byd-carrot2-reference-2026-10-21.md s7.6). AXAY is registered here but has
+; NO consumer in carstate yet. The AxOffset factor 0.027127 is the carrot2 original
+; - suspected typo (Ax uses 0.027167); kept verbatim, no validation basis to change.
+; Bit order is Intel @1+ exactly as carrot2 defines (our kinematic check decoded
+; bytes 0-2 little-endian with the same field split and matched EPS-derived yaw).
+BO_ 546 YAW_RATE: 8 XXX
+ SG_ YawRate : 0|12@1+ (0.002133,-2.094) [-2.0|2.0] "rad/s" XXX
+ SG_ YawRateOffset : 12|12@1+ (0.002133,-0.13) [-0.1|0.1] "rad/s" XXX
+ SG_ Counter : 48|4@1+ (1,0) [0|15] "" XXX
+
+BO_ 547 AXAY: 8 XXX
+ SG_ Ax : 0|12@1+ (0.027167,-21.593) [-10.0|10.0] "m/s^2" XXX
+ SG_ AxOffset : 12|12@1+ (0.027127,-21.593) [-1.0|1.0] "m/s^2" XXX
+ SG_ Counter : 48|4@1+ (1,0) [0|15] "" XXX
+
+; ---------------------------------------------------------------------------
+; bus1 67ms multi-target slot table, block C distance frames ONLY (F0 of the
+; six object rows; docs/byd-radar-slot67-2026-10-18.md §1/§2). x = (b3&0xF)<<8
+; | b2, 11 bit LSB-first (bit 27 = state/overflow), PINNED 2026-10-31 to the engine
+; decode d = 0.062319*x - 1.671 (probe ladder + rd_spec_table g1/sig0 + R2=1.0000
+; regression on the engine output, 221 rows). x=0 empty slot; bit27/decode-floor =
+; range edge. The 1/32 slope-8 model is retired (scene-dependent anchor).
+; F1-F3 (0x381+4k..0x383+4k), block B (0x340-0x34A) and block D (0x3C8-0x3E3)
+; are HYPOTHESIS-isolated and deliberately NOT in this dbc - they enter only
+; after the phase-1 probe 定案 (openspec byd-radar-multitarget-port; decode
+; path is the pure-python assembler radar_multitarget.py, which does not read
+; this dbc). No on-car CANParser subscribes to these addresses.
+BO_ 896 RADAR_SLOTC_380: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C380 : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C380 : 35|11@1+ (1,0) [0|2047] "" XXX
+BO_ 900 RADAR_SLOTC_384: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C384 : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C384 : 35|11@1+ (1,0) [0|2047] "" XXX
+BO_ 904 RADAR_SLOTC_388: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C388 : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C388 : 35|11@1+ (1,0) [0|2047] "" XXX
+BO_ 908 RADAR_SLOTC_38C: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C38C : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C38C : 35|11@1+ (1,0) [0|2047] "" XXX
+BO_ 912 RADAR_SLOTC_390: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C390 : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C390 : 35|11@1+ (1,0) [0|2047] "" XXX
+BO_ 916 RADAR_SLOTC_394: 8 XXX
+ SG_ MSG_SLOTC_CheckSum : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ MSG_SLOTC_CycleCounter : 8|8@1+ (1,0) [0|255] "" XXX
+ SG_ LongDist_C394 : 16|11@1+ (0.062319,-1.671) [0|125.9] "m" XXX
+ SG_ MSG_SLOTC_LatCodeRaw_C394 : 35|11@1+ (1,0) [0|2047] "" XXX
+
+CM_ BO_ 257 "transport retransmission twin of 0x105 (99.7-100 pct byte-identical incl b0 checksum); do NOT use as redundancy/checksum source for 0x109";
+CM_ BO_ 258 "sensor-health channel A (pair with 0x106); b4 slow physical quantity ~152 counts, meaning UNKNOWN - all bytes MSG placeholders";
+CM_ BO_ 261 "transport retransmission twin of 0x101 (see BO_ 257)";
+CM_ BO_ 262 "sensor-health channel B (pair with 0x102); b4 slow physical quantity ~103 counts, meaning UNKNOWN - all bytes MSG placeholders";
+CM_ BO_ 265 "PINNED 2026-10-19 (owner decision, recalled real stop gap): LongDist_109 scale u = 0.25 m/bit. Prior state: TWO-way choice (feet 0.3048 vs 0.25) with hard upper bound u<=0.42-0.44 from 13 stop-to-lead events in byd_logs_2026-10-05_07 (u<=D/delta_b7 per window, lead cannot reverse) -> METERS 1.0 AND 0.5/0.45 REFUTED; stopped-gap median 15 counts -> 3.75 m at 0.25 (4.6 m at feet). 247 = loss-edge transient, 0 = no target, continuous max 246 -> 61.5 m. Not consumed by any on-car CANParser.";
+CM_ BO_ 265 "block-wide: b0 MSG_10x_CheckSum = SAE J1850 CRC-8(poly 0x1D init 0xFF no-refl xorout 0xFF) over b1..b7 - CRACKED 2026-10-18, 100% on 2933 unique payloads + 80100/80100 different-day frames 101/102/106/109/10A; b1 MSG_10x_AliveCounter = rolling counter (low nibble +1/frame, high nibble ~8Hz carry); skip both when modeling";
+CM_ BO_ 266 "Presence_10A: value 7 (bits 111) = forward target visible; cross-segment agreement with HUD lead median 98.62 pct over 415 segments; remaining bits are MSG placeholders";
+CM_ BO_ 896 "PINNED 2026-11-02 (byd-radar-y-wire-port 2.7): MSG_SLOTC_LatCodeRaw = the lateral code, bits 35..45 LSB-first, 11-bit offset binary with zero at 1024. y = (base + d_off)*K*(code - c0) with base = x*0.062319 (distance counts), K = 0.00050091, defaults (c0, d_off) = (-15, -1.671) - the VERDICT constants, engine-verified 427/427 records (|dy| median 11.8 mm; tools/byd/radar_y_wire_decode.py) and vision-gated on per-track aggregates (holdout median 0.135 m / bias -0.006 m over 8-60 m). S1 killed these bits as affine-y - right field, wrong functional form (y is distance-modulated). Raw factor-1 twin: consumers compute y in Python (u-free discipline); the trusted band is 8-60 m."; 
+CM_ BO_ 896 "block-C F0 distance frame of object row 0 (0x380; rows stride 4 -> BO_ 900/904/908/912/916 = rows 1-5). b0 = SAE J1850 CRC-8 over b1..b7 (same family as the 0x10x chain, 100 pct on the 415-segment archive + the 2026-10-31 probe carrier); b1 = GLOBAL cycle counter, step 0x11, identical on every slot-table address of a cycle. x raw 16|12@1+ LSB-first = (b3&0xF)<<8|b2. PINNED 2026-10-31: 0.062319 m per count, offset -1.671 (engine decode; the 1/32 model retired 2026-10-31, physical seal = V2 stop-gap); x=0 empty placeholder, bit27 = state/edge. F1-F3/block B/block D fields are HYPOTHESIS - see the block comment at BO_ 896";

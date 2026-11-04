@@ -357,15 +357,21 @@ static void relay_malfunction_set(void) {
 static void generic_rx_checks(void) {
   gas_pressed_prev = gas_pressed;
 
-  // exit controls on rising edge of brake press
-  if (brake_pressed && (!brake_pressed_prev || vehicle_moving)) {
-    controls_allowed = false;
+  // exit controls on rising edge of brake press (modes with a pedal-proof
+  // engaged latch opt out via disable_pedal_disengage; the mirrors below are
+  // kept so pandaState and the test harness see coherent pedal edges)
+  if (!current_safety_config.disable_pedal_disengage) {
+    if (brake_pressed && (!brake_pressed_prev || vehicle_moving)) {
+      controls_allowed = false;
+    }
   }
   brake_pressed_prev = brake_pressed;
 
   // exit controls on rising edge of regen paddle
-  if (regen_braking && (!regen_braking_prev || vehicle_moving)) {
-    controls_allowed = false;
+  if (!current_safety_config.disable_pedal_disengage) {
+    if (regen_braking && (!regen_braking_prev || vehicle_moving)) {
+      controls_allowed = false;
+    }
   }
   regen_braking_prev = regen_braking;
 

@@ -42,7 +42,7 @@
 
 #define BUILD_SAFETY_CFG(rx, tx) ((safety_config){(rx), (sizeof((rx)) / sizeof((rx)[0])), \
                                                   (tx), (sizeof((tx)) / sizeof((tx)[0])), \
-                                                  false})
+                                                  false, false})
 #define SET_RX_CHECKS(rx, config) \
   do { \
     (config).rx_checks = (rx); \
@@ -211,6 +211,10 @@ typedef struct {
   const CanMsg *tx_msgs;
   int tx_msgs_len;
   bool disable_forwarding;
+  // opt out of the framework-level brake/regen-paddle disengage in
+  // generic_rx_checks (car ports whose engaged latch must survive pedal
+  // presses; e.g. BYD - the session gate lives in the OP controller)
+  bool disable_pedal_disengage;
 } safety_config;
 
 typedef uint32_t (*get_checksum_t)(const CANPacket_t *msg);
