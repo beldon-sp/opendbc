@@ -99,6 +99,11 @@ BSM_FLAGS = {
 def has_bsm(CP: structs.CarParams, CP_SP: structs.CarParamsSP | None) -> bool:
   if CP.brand == "tesla":
     return True
+  # BYD 宋PLUS DM-i: carstate 从 BSD_RADAR 无条件解析 left/rightBlindspot，
+  # 但该品牌没有 HAS_BSM flag，导致 UI 误判为不支持并删除 BSM 相关参数。
+  # 缺报文时信号为 False（fail-safe），仅影响 UI 开关可用性，底层阻断不经过此处。
+  if CP.brand == "byd":
+    return True
   if CP.brand == "rivian":
     return CP_SP is not None and bool(CP_SP.flags & RivianFlagsSP.LONGITUDINAL_HARNESS_UPGRADE)
   return CP.brand in BSM_FLAGS and bool(CP.flags & BSM_FLAGS[CP.brand])
